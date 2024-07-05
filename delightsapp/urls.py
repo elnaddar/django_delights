@@ -8,6 +8,15 @@ ingredient_urls = [
     path("ingredients/delete/<pk>", views.ingredients.IngredientDeleteView.as_view(), name="ingredients.delete"),
 ]
 
+
+menu_items_urls = [
+    path("menu_items/", views.menu_items.MenuItemListView.as_view(), name="menu_items.index"),
+    path("menu_items/create", views.menu_items.MenuItemCreateView.as_view(), name="menu_items.create"),
+    path("menu_items/update/<pk>", views.menu_items.MenuItemUpdateView.as_view(), name="menu_items.update"),
+    path("menu_items/delete/<pk>", views.menu_items.MenuItemDeleteView.as_view(), name="menu_items.delete"),
+]
+
 urlpatterns = [
-    *ingredient_urls
+    *ingredient_urls,
+    *menu_items_urls
 ]

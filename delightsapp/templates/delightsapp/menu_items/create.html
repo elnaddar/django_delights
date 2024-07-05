@@ -1,0 +1,17 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+  <h2>Create Menu Item</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="recipe-requirements-formset">
+      {% for form in inlines %}
+        <div class="form-row">{{ form.as_p }}</div>
+      {% endfor %}
+    </div>
+    <button type="button" onclick="addForm()">Add Recipe Requirement</button>
+    <button type="submit">Save</button>
+  </form>
+  <script src="{% static 'delightsapp/js/menu_items.js' %}"></script>
+{% endblock %}

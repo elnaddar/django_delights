@@ -18,7 +18,10 @@ class Ingredient(models.Model):
 
 class MenuItem(models.Model):
     title = models.CharField(max_length=250, unique=True)
+    description = models.TextField(blank=True)
     price = models.FloatField(default=0)
+    cost = models.FloatField(default=0)
+    weight = models.FloatField(default=1.2)
 
     def __str__(self):
         return self.title
@@ -26,7 +29,8 @@ class MenuItem(models.Model):
     def update_price(self):
         recipe_requirements = RecipeRequirement.objects.filter(menu_item=self)
         total_price = sum(req.ingredient.price * req.quantity for req in recipe_requirements)
-        self.price = total_price * 1.2
+        self.cost = total_price
+        self.price = total_price * self.weight
         self.save()
 
 class RecipeRequirement(models.Model):
