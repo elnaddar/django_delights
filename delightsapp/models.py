@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.shortcuts import reverse
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -11,6 +12,9 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('ingredients.index')
 
 class MenuItem(models.Model):
     title = models.CharField(max_length=250, unique=True)
